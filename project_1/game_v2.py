@@ -15,12 +15,35 @@ def random_predict(number: int = 1) -> int:
         int: Число попыток
     """
     count = 0
-
+    
+    # Узнаем разряднось загаданного числа (0 - до 10, 10 - 100, от 1 до 9 - от 10 до 99)
+    dig_number = number // 10
+    
+    # Если число от 10 до 99 - то с данного десятка начинается подбор числа
+    dec_number = dig_number * 10
+    
+    
     while True:
         count += 1
-        predict_number = np.random.randint(1, 101)  # предполагаемое число
-        if number == predict_number:
-            break  # выход из цикла если угадали
+        
+        if dig_number == 10: # Если число равно 100 - выход из цикла
+            dig_number *= 10
+            if dig_number == number:
+                break
+        
+        elif dig_number == 0: # Если число от 1 до 9
+            dig_number += 1
+            if dig_number == number:
+                break
+        
+        else: # Проверка чисел в диапазоне от 10 до 99
+            if dec_number == number: # Проверка десятков (10, 20, 30 и т.д.)
+                break
+            else: # Проверка чисел в диапазонах между десятками (11, 25, 98 и т.д.)
+                dec_number += 1
+                if dec_number == number:
+                    break         
+            
     return count
 
 

@@ -15,39 +15,18 @@ def random_predict(number: int = 1) -> int:
         int: Число попыток
     """
     count = 0
-    # Узнаем разряднось числа (0 - до 10, 10 - 100, от 1 до 9 - от 10 до 99)
-    dig_number = number // 10
-    # Если число от 10 до 99 - то с данного десятка начинается подбор числа
-    dec_number = dig_number * 10
+    start_num = 1
+    end_num = 100
 
     while True:
-        
-        # Если число равно 100 - выход из цикла
-        if dig_number == 10:
-            count += 1
-            dig_number *= 10
-            if dig_number == number:
-                break
-
-        # Если число от 1 до 9
-        elif dig_number == 0:
-            count += 1
-            dig_number += 1
-            if dig_number == number:
-                break
-
-        # Проверка чисел в диапазоне от 10 до 99
+        count += 1
+        avg_num = (start_num + end_num) // 2
+        if number == avg_num:
+            break
+        elif avg_num > number:
+            end_num = avg_num - 1
         else:
-            # Проверка десятков (10, 20, 30 и т.д.)
-            count += 1
-            if dec_number == number:
-                break
-            # Проверка чисел в диапазонах между десятками (11, 25, 98 и т.д.)
-            else:
-                count += 1
-                dec_number += 1
-                if dec_number == number:
-                    break
+            start_num = avg_num + 1
 
     return count
 

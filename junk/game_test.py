@@ -1,4 +1,4 @@
-num = 55
+num = 1
 start_num = 1
 end_num = 100
 count = 0
@@ -9,8 +9,8 @@ while True:
     if num == avg_num:
         break
     elif avg_num > num:
-        end_num = avg_num
+        end_num = avg_num - 1
     else:
-        start_num = avg_num
+        start_num = avg_num + 1
 
 print(count)
